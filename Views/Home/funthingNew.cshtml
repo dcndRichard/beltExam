@@ -1,0 +1,28 @@
+@model FunThing
+<form asp-action="funThingNewProcess" asp-controller="Home" method="post">
+    <div class="form-group">
+        <span asp-validation-for="Title" class="text-danger" ></span>
+        <label asp-for="Title"></label>
+        <input asp-for="Title" class="form-control">
+    </div>
+    <div class="form-group">
+        <span asp-validation-for="Duration" class="text-danger" ></span>
+        <label asp-for="Duration"></label>
+        <input type="number" asp-for="Duration" class="form-control">
+        <select asp-for="hourMin">
+            <option value="hours">hours</option>
+            <option value="minutes">minutes</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <span asp-validation-for="Date" class="text-danger" ></span>
+        <label asp-for="Date"></label>
+        <input type="datetime-local" asp-for="Date" class="form-control">
+    </div>
+    <div class="form-group">
+        <span asp-validation-for="Desc" class="text-danger" ></span>
+        <label asp-for="Desc"></label>
+        <input asp-for="Desc" class="form-control">
+    </div>
+   <button class="btn btn-success" type="submit">Create</button>
+</form>

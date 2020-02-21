@@ -1,0 +1,25 @@
+@model User
+<form class="myCol" asp-action="registerProcess" asp-controller="Home" method="post">
+    <div class="form-group">
+        <span asp-validation-for="Name" class="text-danger" ></span>
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control">
+    </div>
+    <div class="form-group">
+        <span asp-validation-for="Email" class="text-danger" ></span>
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control">
+    </div>
+    <div class="form-group">
+        <span asp-validation-for="Password" class="text-danger" ></span>
+        <label asp-for="Password"></label>
+        <input asp-for="Password" class="form-control">
+    </div>
+    <div class="form-group">
+        <span asp-validation-for="ConfirmPassword" class="text-danger" ></span>
+        <label asp-for="ConfirmPassword"></label>
+        <input asp-for="ConfirmPassword" class="form-control">
+    </div>
+   <button class="btn btn-success" type="submit">Register</button>
+</form>
+

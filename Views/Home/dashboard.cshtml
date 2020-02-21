@@ -1,0 +1,80 @@
+@model List<FunThing>
+<div>
+    <h1 class="display-4">FunThing Activity Center</h1>
+</div>
+<div class="container">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Activity</th>
+        <th>Date and Time</th>
+        <th>Duration</th>
+        <th>Event Coordinator</th>
+        <th>No. of Participants</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+    @foreach(var activity in @Model)
+    {
+        if(activity.Date > DateTime.Now){
+      <tr>
+        <td><a asp-action="funThingDetails" asp-route-funId="@activity.FunThingId">@activity.Title</a></td>
+        <td>@activity.Date</td>
+        <td>@activity.Duration @activity.hourMin</td>
+        <td>@activity.FunThingCreator.Name</td>
+        <td>@activity.Participants.Count</td>
+        <td>
+         @if(activity.FunThingCreator.UserId == Context.Session.GetInt32("userId"))
+          {
+              <a asp-action="removeFunThing" class="btn btn-danger">Delete</a>
+          }
+          else
+          {
+            var isRVSP = activity.Participants.Any(q =>q.UserId==Context.Session.GetInt32("userId"));
+            if(isRVSP==false)
+            {
+              <form asp-action="rsvpFunThing"asp-route-going="true"  asp-route-funId="@activity.FunThingId">
+                <button class="btn btn-primary" style="width:132px">Join</button>
+              </form>
+            }
+            else
+            {
+              <form asp-action="rsvpFunThing"asp-route-going="true"  asp-route-funId="@activity.FunThingId">
+                <button class="btn btn-success" style="width:132px">Leave</button>
+              </form>
+            }
+          }
+        
+          </td>
+        </tr>
+        }
+    }
+    </tbody>
+  </table>
+  <a asp-action="FunThingNew" class="btn btn-info">New Activity</a>
+
+
+
+        @*<td>
+          @if(activity.FunThingCreator.UserId == Context.Session.GetInt32("userId"))
+          {
+              <a asp-action="removeFunThing" class="btn btn-danger">Delete</a>
+          }
+          else
+          {
+            var isRVSP = activity.Participants.Any(q =>q.UserId==Context.Session.GetInt32("userId"));
+            if(isRVSP==true)
+            {
+              <form asp-action="rsvpFunThing"asp-route-going="true"  asp-route-wedId="@activity.FunThingId">
+                <button class="btn btn-primary" style="width:132px">Join</button>
+              </form>
+            }
+            else
+            {
+              <form asp-action="rsvpFunThing"asp-route-going="true"  asp-route-wedId="@activity.FunThingId">
+                <button class="btn btn-success" style="width:132px">Leave</button>
+              </form>
+            }
+          }
+          </td>*@

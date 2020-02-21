@@ -1,0 +1,29 @@
+@model FunThing
+<div>
+    <h1>@Model.Title</h1>
+    <h2>Event Coordinator: X</h2>
+    <h2>Date: @Model.Date</h2>
+    <h3>Description: @Model.Desc</h3>
+
+
+    @if(@Model.Participants.Any(q =>q.UserId==Context.Session.GetInt32("userId"))==false)
+    {
+        <form asp-action="rsvpFunThing"asp-route-going="true"  asp-route-funId="@Model.FunThingId">
+        <button class="btn btn-primary" style="width:132px">Join</button>
+        </form>
+    }
+    else
+    {
+        <form asp-action="rsvpFunThing"asp-route-going="true"  asp-route-funId="@Model.FunThingId">
+        <button class="btn btn-success" style="width:132px">Leave</button>
+        </form>
+    }
+
+
+    <ul style="margin-top:30px">
+    @foreach(var going in Model.Participants)
+    {
+        <li>@going.Attendant.Name</li>
+    }
+    </ul>
+</div>
